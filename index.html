@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Alam & zainab forever</title>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Segoe UI;}
+
+body{
+    height:100vh;
+    background:radial-gradient(circle at top,#1e1e2f,#000);
+    overflow:hidden;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    color:white;
+}
+
+/* Floating hearts */
+.bg-heart{
+    position:absolute;
+    top:-20px;
+    font-size:18px;
+    animation:fall linear infinite;
+    opacity:0.7;
+}
+@keyframes fall{
+    to{transform:translateY(110vh);}
+}
+
+/* Card */
+.box{
+    background:rgba(255,255,255,0.08);
+    backdrop-filter:blur(15px);
+    padding:30px;
+    border-radius:25px;
+    text-align:center;
+    width:350px;
+    box-shadow:0 0 30px rgba(255,0,120,0.7);
+    z-index:10;
+}
+
+input{
+    padding:10px;
+    border:none;
+    border-radius:10px;
+    margin-top:15px;
+}
+
+button{
+    padding:10px 20px;
+    border:none;
+    border-radius:20px;
+    margin:10px;
+    cursor:pointer;
+    transition:0.3s;
+}
+button:hover{transform:scale(1.1);}
+
+.yes{background:#2ed573;color:white;}
+.no{background:#ff4757;color:white;}
+
+.main{display:none;}
+
+.heart{
+    font-size:60px;
+    animation:beat 1s infinite;
+}
+@keyframes beat{
+    0%{transform:scale(1);}
+    50%{transform:scale(1.3);}
+    100%{transform:scale(1);}
+}
+
+/* Slideshow */
+.slideshow{
+    width:100%;
+    height:200px;
+    margin-top:15px;
+    border-radius:15px;
+    overflow:hidden;
+}
+.slideshow img{
+    width:100%;
+    height:200px;
+    object-fit:cover;
+    display:none;
+}
+.slideshow img.active{
+    display:block;
+}
+
+/* Typing effect */
+#loveText{
+    margin-top:15px;
+    min-height:60px;
+    font-style:italic;
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- MUSIC -->
+<audio id="music" loop>
+<source src="song1.mpg3.mpeg" type="audio/mp3">
+</audio>
+
+<div class="box" id="login">
+<h2>🔐 Secret Love Portal</h2>
+<input type="password" id="pass" placeholder="Enter Password">
+<br>
+<button onclick="check()">Enter</button>
+</div>
+
+<div class="box main" id="content">
+
+<div class="heart">❤️</div>
+<h2>Aallu ❤️ zainuu </h2>
+
+<div id="loveText"></div>
+
+<div class="slideshow">
+<img src="photo3.jpg.jpeg" class="active">
+</div>
+
+<button onclick="playMusic()">🎵 Play Music</button>
+
+<h3>Will you be My valentine!!🥺🌏❤️</h3>
+<button class="yes" onclick="celebrate()">Yes 💖</button>
+<button class="no" onclick="move(this)">No 😜</button>
+
+</div>
+
+<script>
+
+/* PASSWORD */
+function check(){
+    if(document.getElementById("pass").value==="Zain@123"){
+        document.getElementById("login").style.display="none";
+        document.getElementById("content").style.display="block";
+        typeWriter();
+    }else{
+        alert("Wrong Password 😜");
+    }
+}
+
+/* TYPING LOVE LETTER */
+const text="merii jaan... every journey with you feels magical. You are my forever adventure, my happiness, my aallu baby. ❤️";
+let i=0;
+function typeWriter(){
+    if(i<text.length){
+        document.getElementById("loveText").innerHTML+=text.charAt(i);
+        i++;
+        setTimeout(typeWriter,50);
+    }
+}
+
+/* SLIDESHOW */
+let slideIndex=0;
+const slides=document.querySelectorAll(".slideshow img");
+setInterval(()=>{
+    slides[slideIndex].classList.remove("active");
+    slideIndex=(slideIndex+1)%slides.length;
+    slides[slideIndex].classList.add("active");
+},3000);
+
+/* MUSIC */
+function playMusic(){
+    document.getElementById("music").play();
+}
+
+/* YES CELEBRATION */
+function celebrate(){
+    alert(" I lovee youu so muchh meriii jaan ❤️✨🫶🏻🫦💋🫂🌏meraa allu baby 🫦🫦😙😙✨");
+}
+
+/* MOVE NO BUTTON */
+function move(btn){
+    btn.style.position="absolute";
+    btn.style.top=Math.random()*window.innerHeight+"px";
+    btn.style.left=Math.random()*window.innerWidth+"px";
+}
+
+/* BACKGROUND HEARTS */
+function createHeart(){
+    const heart=document.createElement("div");
+    heart.classList.add("bg-heart");
+    heart.innerHTML="💖";
+    heart.style.left=Math.random()*window.innerWidth+"px";
+    heart.style.animationDuration=(Math.random()*3+2)+"s";
+    document.body.appendChild(heart);
+    setTimeout(()=>heart.remove(),5000);
+}
+setInterval(createHeart,300);
+
+</script>
+
+</body>
+</html>
